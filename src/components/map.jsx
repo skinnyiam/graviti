@@ -1,13 +1,13 @@
 import React from "react";
 import { GoogleMap, Marker, DirectionsRenderer } from "@react-google-maps/api";
 
-const Map = ({directions}) => {
-    const containerStyle = {
-        width: "550px",
-        height: "550px",
-      };
-      
-      const center = { lat: 28.351839, lng: 79.409561 };
+const Map = ({ directions }) => {
+  const containerStyle = {
+    width: "550px",
+    height: "550px",
+  };
+
+  const center = { lat: 28.351839, lng: 79.409561 };
   return (
     <div>
       <GoogleMap

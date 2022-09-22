@@ -3,6 +3,7 @@ import { MdLocationOn } from "react-icons/md";
 import Map from "../src/components/map";
 
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import Navbar from "./components/navbar";
 
 function App() {
   const [directions, setDirections] = useState("");
@@ -18,6 +19,8 @@ function App() {
     libraries: ["places"],
   });
 
+  //function to calculate routes 
+
   const Route = async (event) => {
     event.preventDefault();
     if (originRef.current.value === "" || destiantionRef.current.value === "") {
@@ -25,15 +28,15 @@ function App() {
     }
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
+    const data = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     });
-    setDirections(results);
-    setDistance(results.routes[0].legs[0].distance.text);
-    console.log(results.routes[0].legs[0].distance.text);
+    setDirections(data);
+    setDistance(data.routes[0].legs[0].distance.text);
+    console.log(data.routes[0].legs[0].distance.text);
   };
 
   
@@ -42,8 +45,11 @@ function App() {
 
   return isLoaded ? (
     <>
-      <div className=" bg-[#F4F8FA] h-[720px]">
-        <h1 className="text-center text-xl text-[#1B31A8] pt-8">
+
+    {/* form div  */}
+      <div className=" bg-[#F4F8FA] min-h-screen">
+    <Navbar />
+        <h1 className="text-center text-md text-[#1B31A8] pt-8">
           Let's calculate <span className="font-medium">distance</span> from
           Google maps
         </h1>
@@ -51,7 +57,7 @@ function App() {
           <div className="w-1/2 p-28">
             <div className="flex">
               <div className="w-1/2">
-                <label className="mb-2 text-sm">Origin</label>
+                <label className="mb-4 text-sm">Origin</label>
 
                 <Autocomplete>
                   <div>
@@ -59,14 +65,14 @@ function App() {
                       <MdLocationOn />
                     </div>
                     <input
-                      className="w-64 h-14 mb-8 outline outline-none border border-gray-300 rounded-md pl-10 text-2xl text-[#4D6475] font-medium "
+                      className="w-64 h-14 mb-8 outline  outline-none border border-gray-300 rounded-md pl-10 text-2xl text-[#4D6475] font-medium "
                       type="text"
                       placeholder="Origin"
                       ref={originRef}
                     />
                   </div>
                 </Autocomplete>
-                <label className="mb-2 text-sm">Destination</label>
+                <label className="mb-4 text-sm">Destination</label>
 
                 <Autocomplete>
                   <>
@@ -74,7 +80,7 @@ function App() {
                       <MdLocationOn />
                     </div>
                     <input
-                      className="w-64 h-14 outline outline-none border border-gray-300 rounded-md pl-10 text-2xl text-[#4D6475] font-medium"
+                      className="w-64 h-14 outline outline-none border border-gray-300 rounded-md pl-10  text-2xl text-[#4D6475] font-medium"
                       type="text"
                       placeholder="destination"
                       ref={destiantionRef}
@@ -84,7 +90,7 @@ function App() {
               </div>
               <div className="flex justify-center items-center w-1/2">
                 <button
-                  className="w-32 h-16 bg-[#1B31A8] rounded-full text-white font-medium text-xl"
+                  className="w-32 h-14 bg-[#1B31A8] text-center rounded-full text-white font-medium text-md"
                   onClick={Route}
                 >
                   Calculate
@@ -92,7 +98,7 @@ function App() {
                 
               </div>
             </div>
-            <div className=" mt-14 border border-gray-300  rounded-sm">
+            <div className=" mt-14 border border-gray-300  rounded-md">
               <div className="bg-[#FFFFFF] h-20 p-6 flex justify-between">
                 <h1 className="text-[#1E2A32] text-xl font-medium">Distance</h1>
                 <h1 className="text-[#0079FF] text-3xl font-medium">
