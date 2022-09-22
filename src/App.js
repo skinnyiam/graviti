@@ -19,7 +19,7 @@ function App() {
     libraries: ["places"],
   });
 
-  //function to calculate routes 
+  //function to calculate routes
 
   const Route = async (event) => {
     event.preventDefault();
@@ -39,16 +39,14 @@ function App() {
     console.log(data.routes[0].legs[0].distance.text);
   };
 
-  
   // console.log(typeof(directions.request.origin))
   console.log(directions);
 
   return isLoaded ? (
     <>
-
-    {/* form div  */}
+      {/* form div  */}
       <div className=" bg-[#F4F8FA] min-h-screen">
-    <Navbar />
+        <Navbar />
         <h1 className="text-center text-md text-[#1B31A8] pt-8">
           Let's calculate <span className="font-medium">distance</span> from
           Google maps
@@ -95,7 +93,6 @@ function App() {
                 >
                   Calculate
                 </button>
-                
               </div>
             </div>
             <div className=" mt-14 border border-gray-300  rounded-md">
